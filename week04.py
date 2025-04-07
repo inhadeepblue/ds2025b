@@ -28,6 +28,7 @@ class LinkedList:
         while current:
             if current.data == target:
                 previous.link = current.link
+                current.link = None
             previous = current
             current = current.link
 
@@ -59,6 +60,7 @@ print(ll)
 print(ll.search(100))
 print(ll.search(-9))
 ll.remove(90)
-ll.remove(-9)
+# ll.remove(-9)
+ll.remove(10)
 print(ll)
 
