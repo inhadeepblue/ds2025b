@@ -25,9 +25,11 @@ class Queue:
             raise IndexError("Queue is empty!")
         self.size = self.size - 1
         temp = self.front
+        # temp.link = None
         self.front = self.front.link
         if self.front is None:
             self.rear = None
+        temp.link = None
         return temp.data
 
 
