@@ -4,12 +4,27 @@ class TreeNode:
 		self.data = None
 		self.right = None
 
+def pre_order(node):
+    if node is None:
+        return
+    print(node.data, end="->")
+    pre_order(node.left)
+    pre_order(node.right)
+
+
+def in_order(node):
+    if node is None:
+        return
+    in_order(node.left)
+    print(node.data, end="->")
+    in_order(node.right)
+
 
 def post_order(node):
     if node:
         post_order(node.left)
         post_order(node.right)
-        print(node.data, end='-')
+        print(node.data, end='->')
 
 
 def insert(root, value):
@@ -42,7 +57,11 @@ if __name__ == "__main__":
         root = insert(root, number)
 
     print("BST 구성 완료")
-    post_order(root)  # 3 9 8 15 10
+    post_order(root)  # 3->9->8->15->10
+    print()
+    in_order(root)  # 3->8->9->10->15
+    print()
+    pre_order(root)  # 10->8->3->9->15
 
 
     # find_number = int(input())
