@@ -14,35 +14,19 @@ def print_graph(g) :
 		print()
 	print()
 
+
+def dfs(g, current, visited):
+	visited.append(current)
+	for vertex in range(graph_size):
+		if g.graph[current][vertex] > 0 and vertex not in visited:
+			dfs(g, vertex, visited)
+
+
 def find_vertex(g, find_vtx) :
-	stack = list()
 	visited_ary = list()
-
-	current = 0	# 시작 정점
-	stack.append(current)
-	visited_ary.append(current)
-
-	while stack:
-		next = None
-		for vertex in range(graph_size):
-			if g.graph[current][vertex] != 0:
-				if vertex in visited_ary:
-					pass
-				else :
-					next = vertex
-					break
-
-		if next is not None:
-			current = next
-			stack.append(current)  # push
-			visited_ary.append(current)  # push
-		else :					# 다음에 방문할 정점이 없는 경우
-			current = stack.pop()
-
-	if find_vtx in visited_ary:
-		return True
-	else :
-		return False
+	start = 0
+	dfs(g, start, visited_ary)
+	return find_vtx in visited_ary  # True or False
 
 
 g1 = None
