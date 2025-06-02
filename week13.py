@@ -80,3 +80,7 @@ for cost, s, e in mst_edges:
 print('최소 비용 계산')
 print_graph(mst_graph)
 print(f"최소 비용 :  {mst_cost}")
+
+print('\nMST 간선 목록')
+for cost, u, v in mst_edges:
+	print(f"{name_ary[u]} --- {name_ary[v]} : {cost}")
