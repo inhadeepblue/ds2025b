@@ -1,27 +1,36 @@
-n = int(input())  # N (명령어 개수)
-stack = []  # 파이썬의 리스트를 이용
+import sys
+sys.setrecursionlimit(10**6)
 
-for i in range(n):
-  order = input().strip()
-  if 'push' in order:  # push X: 정수 X를 스택에 넣는 연산이다.
-    number = order.split()  # ex) "push 1"  --> ["push", "1"]
-    stack.append(number[-1])  # "1"
-  elif order == 'pop':  # pop: 스택에서 가장 위에 있는 정수를 빼고, 그 수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
-    if len(stack) == 0:  # 스택이 비어 있으면
-      print(-1)
+class TreeNode:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
+
+
+def insert(node, key):  # BST
+  if node is None:
+    return TreeNode(key)
+  else:
+    if key < node.val:
+      node.left = insert(node.left, key)
     else:
-      # print(stack[-1])  # 출력
-      # stack.pop()  # 삭제. Last In First Out
-      print(stack.pop())  # 출력
-  elif order == 'size':  # size: 스택에 들어있는 정수의 개수를 출력한다.
-    print(len(stack))
-  elif order == 'empty':  # empty: 스택이 비어있으면 1, 아니면 0을 출력한다.
-    if len(stack) == 0:  # 스택이 비어 있으면
-      print(1)
-    else:
-      print(0)
-  elif order == 'top':  # top: 스택의 가장 위에 있는 정수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다. peek
-    if len(stack) == 0:  # 스택이 비어 있으면
-      print(-1)
-    else:
-      print(stack[-1])  # Top 값 출력
+      node.right = insert(node.right, key)
+  return node
+
+
+def post_order(node):
+  if node:    
+    post_order(node.left)  # left subtree    
+    post_order(node.right)  # right subtree
+    print(node.val)  # process
+
+
+inputs = [50, 30, 24, 5, 28, 45, 98, 52, 60]  # preorder input
+root = None
+# for i in sys.stdin:
+for i in inputs:
+  # root = insert(root, int(i.strip()))
+  root = insert(root, i)
+
+post_order(root)
